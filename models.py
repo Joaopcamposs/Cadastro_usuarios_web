@@ -2,7 +2,7 @@ from sqlalchemy.schema import Column
 from sqlalchemy.types import String, Integer
 from database import Base
 
-class users(Base):
+class User(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     nome = Column(String)
