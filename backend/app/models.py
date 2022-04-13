@@ -1,6 +1,6 @@
 from sqlalchemy.schema import Column
 from sqlalchemy.types import String, Integer
-from database import Base
+from backend.app.database import Base
 import passlib.hash as _hash
 
 

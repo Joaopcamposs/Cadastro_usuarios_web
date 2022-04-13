@@ -1,15 +1,17 @@
+from typing import List
 from fastapi import APIRouter, Depends, HTTPException, security
 from sqlalchemy.orm import Session
-from crud import get_all_users, create_user, update_user, delete_user, get_user_by_cpf
-from database import get_db
-from exceptions import UserException
-from schemas import User, CreateAndUpdateUser
-from services import authenticate_user_cpf, create_token, get_current_user
+from backend.app.crud import get_all_users, create_user, update_user, delete_user, get_user_by_cpf
+from backend.app.database import get_db
+from backend.app.exceptions import UserException
+from backend.app.schemas import User, CreateAndUpdateUser
+from backend.app.services import authenticate_user_cpf, create_token, get_current_user
 
 app = APIRouter()
 
+
 # API endpoint to get the list of users
-@app.get("/api/users")
+@app.get("/api/users", response_model=List[User])
 async def list_users(session: Session = Depends(get_db)):
     users_list = await get_all_users(session=session)
 
@@ -22,6 +24,7 @@ async def add_user(new_user: CreateAndUpdateUser, session: Session = Depends(get
     try:
         user = await create_user(session, new_user)
         return user
+        # return await services.create_token(user)
     except UserException as cie:
         raise HTTPException(**cie.__dict__)
 
@@ -49,7 +52,7 @@ async def get_user_info(user_cpf: str, session: Session = Depends(get_db)):
 # API endpoint to update a existing user
 @app.put("/api/user/{user_cpf}", response_model=User)
 async def update_user_info(user_cpf: str, new_info: CreateAndUpdateUser,
-                session: Session = Depends(get_db)):
+                           session: Session = Depends(get_db)):
     try:
         user = await update_user(session, user_cpf, new_info)
         return user

@@ -1,8 +1,8 @@
 from typing import List
 from sqlalchemy.orm import Session
-from exceptions import UserAlreadyExistError, UserNotFoundError
-from models import User
-from schemas import CreateAndUpdateUser
+from backend.app.exceptions import UserAlreadyExistError, UserNotFoundError
+from backend.app.models import User
+from backend.app.schemas import CreateAndUpdateUser
 import passlib.hash as _hash
 
 

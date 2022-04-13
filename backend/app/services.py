@@ -1,12 +1,12 @@
 import jwt
-import models
-import schemas
+import backend.app.models as models
+import backend.app.schemas as schemas
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
 from fastapi import Depends, HTTPException
-from crud import get_user_by_cpf
-from database import get_db
-from exceptions import UserNotFoundError
+from backend.app.crud import get_user_by_cpf
+from backend.app.database import get_db
+from backend.app.exceptions import UserNotFoundError
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/token")
 
