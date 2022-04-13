@@ -1,7 +1,8 @@
 from sqlalchemy.schema import Column
 from sqlalchemy.types import String, Integer
 from database import Base
-import passlib.hash as hash
+import passlib.hash as _hash
+
 
 class User(Base):
     __tablename__ = "users"
@@ -20,4 +21,4 @@ class User(Base):
     hashed_password = Column(String)
 
     def verify_password(self, password: str):
-        return hash.bcrypt.verify(password, self.hashed_password)
+        return _hash.bcrypt.verify(password, self.hashed_password)

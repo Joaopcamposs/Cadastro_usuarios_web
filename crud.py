@@ -3,11 +3,11 @@ from sqlalchemy.orm import Session
 from exceptions import UserAlreadyExistError, UserNotFoundError
 from models import User
 from schemas import CreateAndUpdateUser
-import passlib.hash as hash
+import passlib.hash as _hash
 
 
 # Function to get list of users
-def get_all_users(session: Session) -> List[User]:
+async def get_all_users(session: Session) -> List[User]:
     return session.query(User).all()
 
 
@@ -22,7 +22,7 @@ def get_all_users(session: Session) -> List[User]:
 
 
 # Function to  get info of a particular user by CPF
-def get_user_by_cpf(session: Session, _cpf: str) -> User:
+async def get_user_by_cpf(session: Session, _cpf: str) -> User:
     user = session.query(User).filter(User.CPF == _cpf).first()
 
     if user is None:
@@ -32,14 +32,14 @@ def get_user_by_cpf(session: Session, _cpf: str) -> User:
 
 
 # Function to add a new user to the database
-def create_user(session: Session, user: CreateAndUpdateUser) -> User:
+async def create_user(session: Session, user: CreateAndUpdateUser) -> User:
     user_details = session.query(User).filter(User.CPF == user.CPF).first()
 
     if user_details is not None:
         raise UserAlreadyExistError
 
     new_user = User(**user.dict())
-    new_user.hashed_password = hash.bcrypt.hash(new_user.hashed_password)
+    new_user.hashed_password = _hash.bcrypt.hash(new_user.hashed_password)
     session.add(new_user)
     session.commit()
     session.refresh(new_user)
@@ -47,8 +47,8 @@ def create_user(session: Session, user: CreateAndUpdateUser) -> User:
 
 
 # Function to update details of the user
-def update_user(session: Session, _cpf: str, info_update: CreateAndUpdateUser) -> User:
-    user = get_user_by_cpf(session, _cpf)
+async def update_user(session: Session, _cpf: str, info_update: CreateAndUpdateUser) -> User:
+    user = await get_user_by_cpf(session, _cpf)
 
     if user is None:
         raise UserNotFoundError
@@ -64,7 +64,7 @@ def update_user(session: Session, _cpf: str, info_update: CreateAndUpdateUser) -
     user.complement = info_update.complement
     user.CPF = info_update.CPF
     user.PIS = info_update.PIS
-    user.hashed_password = hash.bcrypt.hash(info_update.hashed_password)
+    user.hashed_password = _hash.bcrypt.hash(info_update.hashed_password)
 
     session.commit()
     session.refresh(user)
@@ -73,8 +73,8 @@ def update_user(session: Session, _cpf: str, info_update: CreateAndUpdateUser) -
 
 
 # Function to delete a user from the db
-def delete_user(session: Session, _cpf: str):
-    user = get_user_by_cpf(session, _cpf)
+async def delete_user(session: Session, _cpf: str):
+    user = await get_user_by_cpf(session, _cpf)
 
     if user is None:
         raise UserNotFoundError

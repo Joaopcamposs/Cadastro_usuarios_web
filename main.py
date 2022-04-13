@@ -1,15 +1,13 @@
-# Import FastAPI
 from fastapi import FastAPI
-from pydantic import BaseModel
-import uvicorn
 import api
 
-# Initialize the app
 app = FastAPI()
 
-app.include_router(api.router)
+# include routes from api
+app.include_router(api.app)
 
-#uvicorn --reload main:app
+# run application
+# uvicorn --reload main:app
 
 # GET operation at route '/'
 @app.get('/')
