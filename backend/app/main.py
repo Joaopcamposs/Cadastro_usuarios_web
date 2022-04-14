@@ -6,8 +6,9 @@ app = FastAPI()
 # include routes from api
 app.include_router(api.app)
 
+
 # run application
-# uvicorn --reload main:app
+# uvicorn --reload backend.app.main:app
 
 # GET operation at route '/'
 @app.get('/')
