@@ -11,6 +11,6 @@ app.include_router(api.app)
 # uvicorn --reload backend.app.main:app
 
 # GET operation at route '/'
-@app.get('/')
+@app.get('/api')
 def root_api():
-    return {"message": "Welcome to WEB users sign"}
+    return {"message": "Welcome to WEB user registration"}
