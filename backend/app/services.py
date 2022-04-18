@@ -33,7 +33,7 @@ async def create_token(user: models.User):
     return dict(access_token=token, token_type="Bearer")
 
 
-async def get_current_user(session: Session = Depends(get_db),
+async def get_user(session: Session = Depends(get_db),
                            token: str = Depends(oauth2_scheme)):
     try:
         payload = jwt.decode(token, JWT_SECRET, algorithms=["HS256"])

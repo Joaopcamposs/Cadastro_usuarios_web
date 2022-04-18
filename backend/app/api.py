@@ -5,7 +5,7 @@ from backend.app.crud import get_all_users, create_user, update_user, delete_use
 from backend.app.database import get_db
 from backend.app.exceptions import UserException
 from backend.app.schemas import User, CreateAndUpdateUser
-from backend.app.services import authenticate_user_cpf, create_token, get_current_user
+from backend.app.services import authenticate_user_cpf, create_token, get_user
 
 app = APIRouter()
 
@@ -23,8 +23,8 @@ async def list_users(session: Session = Depends(get_db)):
 async def add_user(new_user: CreateAndUpdateUser, session: Session = Depends(get_db)):
     try:
         user = await create_user(session, new_user)
-        return user
-        # return await services.create_token(user)
+        # return user
+        return await create_token(user)
     except UserException as cie:
         raise HTTPException(**cie.__dict__)
 
@@ -83,7 +83,7 @@ async def generate_token(
     return await create_token(user)
 
 
-# API endpoint to get current legged user
+# API endpoint to get current logged user
 @app.get("/api/users/me", response_model=User)
-async def get_user(user: User = Depends(get_current_user)):
+async def get_current_user(user: User = Depends(get_user)):
     return user

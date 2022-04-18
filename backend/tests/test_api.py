@@ -9,11 +9,11 @@ class TestAPI(TestCase):
         self.client = TestClient(app)
 
     def test_get_root_main_return_status_200(self):
-        response = self.client.get("/")
+        response = self.client.get("/api")
         self.assertEqual(200, response.status_code)
 
     def test_get_root_main_return_json(self):
-        response = self.client.get("/")
+        response = self.client.get("/api")
         self.assertEqual('application/json', response.headers.get('content-type'))
 
     @mock.patch('backend.app.crud.get_all_users')
@@ -67,7 +67,7 @@ class TestAPI(TestCase):
         self.assertEqual('application/x-www-form-urlencoded', response.headers.get('content-type'))
         self.assertEqual(200, response.status_code)
 
-    @mock.patch('backend.app.crud.get_current_user')
+    @mock.patch('backend.app.crud.get_user')
     async def test_get_current_user_return_json_and_status_200(self, mock_api):
         response = self.client.get('/api/users/me')
         self.assertEqual('application/json', response.headers.get('content-type'))
