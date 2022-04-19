@@ -1,13 +1,15 @@
 import React, {useContext, useEffect, useState} from "react";
 import { UserContext } from "../context/UserContext";
+import EditUser from "./EditUser";
 import ErrorMessage from "./ErrorMessage";
 
 
 const User = () =>{
     const [token] = useContext(UserContext);
-    const[user, setUser] = useState("");
-    const[errorMessage, setErrorMessage] = useState("");
-    const[loaded, setLoaded] = useState("");
+    const [user, setUser] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+    const [loaded, setLoaded] = useState("");
+    const [editUser, setEditUser] = useState("");
 
     const getUser = async () => {
         const requestOptions ={
@@ -24,6 +26,7 @@ const User = () =>{
         }else{
             setUser(data);
             setLoaded(true);
+            setEditUser(false);
         }
     };
 
@@ -35,9 +38,19 @@ const User = () =>{
         <>
             <ErrorMessage message={errorMessage}/>
             {loaded && user ? (
-                <h1 className="title">Hello {user.name}</h1>
+                !editUser ? (
+                <div className="columns">
+                    <div className="column is-tow-third">
+                        <h1 className="title">Hello {user.name}</h1>
+                    </div>
+                    <div className="column is-one-third">
+                        <button className="button is-danger" 
+                        onClick={() => {setEditUser(true)}}>Edit User</button>
+                    </div>      
+                </div>
+                ) : <EditUser/>   
             ) : 
-            <p>Loading</p>
+            <p>Loading...</p>
             }
         </>
     )

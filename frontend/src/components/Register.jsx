@@ -16,10 +16,11 @@ const Register = () =>{
     const[cpf, setCPF] = useState("");
     const[pis, setPIS] = useState("");
     const[password, setPassword] = useState("");
+
     const[errorMessage, setErrorMessage] = useState("");
     const[, setToken] = useContext(UserContext);
 
-    const submitLogin = async () => {
+    const submitRegister = async () => {
         const requestOptions ={
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -43,7 +44,7 @@ const Register = () =>{
     const handleSubmit = (e) => {
         e.preventDefault();
         if(password.length >= 8){
-            submitLogin();
+            submitRegister();
         }else{
             setErrorMessage("Ensure that password are greater than 8 characters")
         }
@@ -160,7 +161,7 @@ const Register = () =>{
                         <input type="text" className="input" 
                         placeholder="Enter PIS" value={pis} 
                         onChange={(e) => setPIS(e.target.value)} 
-                        // required
+                        required
                         />
                     </div>
                 </div>
