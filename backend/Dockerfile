@@ -11,7 +11,7 @@ COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
 # copy project
-COPY ../ /projetoWeb/backend
+COPY . /projetoWeb/backend
 
 # expose the 3000 port from the localhost system
 EXPOSE 8000
