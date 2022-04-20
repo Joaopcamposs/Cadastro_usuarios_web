@@ -11,37 +11,19 @@ services:
       MYSQL_USER: root
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
-    networks:
-      - back-db
 
   api:
     container_name: api
-    depends_on:
-      - db
     build: ./backend
     ports:
       - "8000:8000"
-    networks:
-      - back-db
-      - back-front
-    expose:
-      - 8000
+    depends_on:
+      - db
 
   web:
     container_name: web
-    depends_on:
-      - api
     build: ./frontend
     ports:
       - "3000:3000"
-    networks:
-      - back-front
-    expose:
-      - 3000
-    tty: true
-
-networks:
-  back-db:
-    driver: bridge
-  back-front:
-    driver: bridge
+    depends_on:
+      - api

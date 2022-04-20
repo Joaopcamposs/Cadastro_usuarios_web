@@ -13,6 +13,8 @@ RUN pip install -r requirements.txt
 # copy project
 COPY ../ /projetoWeb/backend
 
+# expose the 3000 port from the localhost system
 EXPOSE 8000
 
+# run app
 CMD ["uvicorn", "backend.app.main:app", "--reload",  "--host", "0.0.0.0", "--port", "8000"]

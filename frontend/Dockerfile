@@ -1,4 +1,4 @@
-FROM node:lts
+FROM node:lts-alpine
 
 # set work directory
 WORKDIR /frontend
@@ -12,7 +12,8 @@ RUN npm install
 # copy project
 COPY . .
 
+# expose the 3000 port from the localhost system
 EXPOSE 3000
 
-# build app for production with minification
-CMD npm start
+# build and run app
+CMD ["npm", "start"]
