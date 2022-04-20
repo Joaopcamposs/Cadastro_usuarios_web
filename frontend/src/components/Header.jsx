@@ -12,7 +12,7 @@ const Header = () => {
     return(
         !token ?
         <div className="has-text-centered m-6">
-            <h1 className="title">Hello Visitor</h1>
+            <h1 className="title">Olá Visitante</h1>
             {token && (
             <button className="button" onClick={handleLogout}>
                 Logout

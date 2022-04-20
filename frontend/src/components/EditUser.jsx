@@ -47,7 +47,7 @@ const EditUser= () => {
         setCPF(data.CPF);
         setPIS(data.PIS);
         if(!response.ok){
-            setErrorMessage("Something went wrong. Couldn't load user data");
+            setErrorMessage("Algo deu errado. Não foi possível carregar os dados do usuário.");
         }else{
             setUser(data);
             setLoaded(true);
@@ -69,7 +69,7 @@ const EditUser= () => {
         const response = await fetch(`/api/user/${cpf}`, requestOptions);
 
         if(!response.ok){
-            setErrorMessage("Something went wrong when updating user");
+            setErrorMessage("Algo deu errado ao atualizar o usuário");
         }
     };
 
@@ -82,7 +82,7 @@ const EditUser= () => {
         const response = await fetch(`/api/user/${cpf}`, requestOptions);
 
         if(!response.ok){
-            setErrorMessage("Failed to delete user");
+            setErrorMessage("Falha ao excluir usuário");
         }
         setToken(null);
     };
@@ -92,9 +92,10 @@ const EditUser= () => {
             <ErrorMessage message={errorMessage}/>
             {loaded && user ? (
                 <div className="box">
+                <h1 className="title has-text-centered">Editar Cadastro</h1>
                     <section className="">
                         <form>
-                            <label className="label">Name</label>
+                            <label className="label">Nome</label>
                             <input type="text" className="input" value={name} 
                             onChange={(e) => setName(e.target.value)} required/>
                             <br/><br/>
@@ -102,31 +103,31 @@ const EditUser= () => {
                             <input type="email" className="input" value={email}
                             onChange={(e) => setEmail(e.target.value)} required/>
                             <br/><br/>
-                            <label className="label">Country</label>
+                            <label className="label">País</label>
                             <input type="text" className="input" value={country}
                             onChange={(e) => setCountry(e.target.value)} required/>
                             <br/><br/>
-                            <label className="label">State</label>
+                            <label className="label">Estado</label>
                             <input type="text" className="input" value={state}
                             onChange={(e) => setState(e.target.value)} required/>
                             <br/><br/>
-                            <label className="label">City</label>
+                            <label className="label">Cidade</label>
                             <input type="text" className="input" value={city}
                             onChange={(e) => setCity(e.target.value)} required/>
                             <br/><br/>
-                            <label className="label">Postal Code</label>
-                            <input type="text" className="input" value={postal_code}
+                            <label className="label">CEP</label>
+                            <input type="number" className="input" value={postal_code}
                             onChange={(e) => setPostalCode(e.target.value)}/>
                             <br/><br/>
-                            <label className="label">Street</label>
+                            <label className="label">Rua</label>
                             <input type="text" className="input" value={street}
                             onChange={(e) => setStreet(e.target.value)} required/>
                             <br/><br/>
-                            <label className="label">Number</label>
+                            <label className="label">Número</label>
                             <input type="number" className="input" value={number}
                             onChange={(e) => setNumber(e.target.value)} required/>
                             <br/><br/>
-                            <label className="label">Complement</label>
+                            <label className="label">Complemento</label>
                             <input type="text" className="input" value={complement}
                             onChange={(e) => setComplement(e.target.value)}/>
                             <br/><br/>
@@ -138,7 +139,7 @@ const EditUser= () => {
                             <input type="number" className="input" value={pis}
                             onChange={(e) => setPIS(e.target.value)} required/>
                             <br/><br/>
-                            <label className="label">Password</label>
+                            <label className="label">Senha</label>
                             <input type="password" className="input" value={""}
                             onChange={(e) => setPassword(e.target.value)} required/>
                             <br/>
@@ -148,13 +149,13 @@ const EditUser= () => {
                     <div className="">
                         <br/>
                         <button className="button is-link" 
-                        onClick={() => {updateUser()}}>Save</button>
+                        onClick={() => {updateUser()}}>Salvar</button>
                         <button className="button is-danger" 
-                        onClick={() => {deleteUser()}} style={{float:"right"}}>Delete</button>
+                        onClick={() => {deleteUser()}} style={{float:"right"}}>Excluir</button>
                     </div>
                 </div>
             ) : 
-            <p>Loading...</p>
+            <p>Carregando...</p>
             }
         </>
     );

@@ -20,14 +20,15 @@ const App = () => {
               !token ? (
                 <div className="rows">
                   <div className="columns is-centered">
-                    <button className="button is-info" onClick={() => setRegister(false)} >Login</button>
-                    <button className="button is-danger" onClick={() => setRegister(true)}>Register</button>
+                    <button className="button is-info"
+                    onClick={() => setRegister(false)}>Entrar</button>
+                    <button className="button is-danger"
+                    onClick={() => setRegister(true)}>Cadastrar</button>
                   </div>
                   { !register ? <Login/> : <Register/> }
                 </div>
               ) : 
                 // <p>User logged</p>
-                
                 <User/>
             }
           </div>

@@ -22,7 +22,7 @@ const User = () =>{
         const response = await fetch("/api/users/me", requestOptions);
         const data = await response.json();
         if(!response.ok){
-            setErrorMessage("Something went wrong. Couldn't load user data");
+            setErrorMessage("Algo deu errado. Não foi possível carregar os dados do usuário");
         }else{
             setUser(data);
             setLoaded(true);
@@ -41,16 +41,16 @@ const User = () =>{
                 !editUser ? (
                 <div className="columns">
                     <div className="column is-tow-third">
-                        <h1 className="title">Hello {user.name}</h1>
+                        <h1 className="title">Olá {user.name}</h1>
                     </div>
                     <div className="column is-one-third">
                         <button className="button is-danger" 
-                        onClick={() => {setEditUser(true)}}>Edit User</button>
+                        onClick={() => {setEditUser(true)}}>Editar Usuário</button>
                     </div>      
                 </div>
                 ) : <EditUser/>   
             ) : 
-            <p>Loading...</p>
+            <p>Carregando...</p>
             }
         </>
     )

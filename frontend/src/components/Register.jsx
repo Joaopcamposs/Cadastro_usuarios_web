@@ -46,20 +46,20 @@ const Register = () =>{
         if(password.length >= 8){
             submitRegister();
         }else{
-            setErrorMessage("Ensure that password are greater than 8 characters")
+            setErrorMessage("Certifique-se de que a senha tenha mais de 8 caracteres")
         }
     };
 
     return(
         <div className="column">
             <form className="box" onSubmit={handleSubmit}>
-                <h1 className="title has-text-centered">Register</h1>
+                <h1 className="title has-text-centered">Cadastro</h1>
                 
                 <div className="field">
-                    <label className="label">Name</label>
+                    <label className="label">Nome</label>
                     <div className="control">
                         <input type="text" className="input" 
-                        placeholder="Enter Name" value={name} 
+                        placeholder="Nome" value={name}
                         onChange={(e) => setName(e.target.value)} 
                         required
                         />
@@ -69,77 +69,77 @@ const Register = () =>{
                     <label className="label">Email</label>
                     <div className="control">
                         <input type="email" className="input" 
-                        placeholder="Enter Email" value={email} 
+                        placeholder="Email" value={email}
                         onChange={(e) => setEmail(e.target.value)} 
                         required
                         />
                     </div>
                 </div>
                 <div className="field">
-                    <label className="label">Country</label>
+                    <label className="label">País</label>
                     <div className="control">
                         <input type="text" className="input" 
-                        placeholder="Enter Country" value={country} 
+                        placeholder="País" value={country}
                         onChange={(e) => setCountry(e.target.value)} 
                         required
                         />
                     </div>
                 </div>
                 <div className="field">
-                    <label className="label">State</label>
+                    <label className="label">Estado</label>
                     <div className="control">
                         <input type="text" className="input" 
-                        placeholder="Enter State" value={state} 
+                        placeholder="Estado" value={state}
                         onChange={(e) => setState(e.target.value)} 
                         required
                         />
                     </div>
                 </div>
                 <div className="field">
-                    <label className="label">City</label>
+                    <label className="label">Cidade</label>
                     <div className="control">
                         <input type="text" className="input" 
-                        placeholder="Enter City" value={city} 
+                        placeholder="Cidade" value={city}
                         onChange={(e) => setCity(e.target.value)} 
                         required
                         />
                     </div>
                 </div>
                 <div className="field">
-                    <label className="label">Postal Code</label>
+                    <label className="label">CEP</label>
                     <div className="control">
-                        <input type="text" className="input" 
-                        placeholder="Enter Postal Code" value={postal_code} 
+                        <input type="number" className="input"
+                        placeholder="CEP" value={postal_code}
                         onChange={(e) => setPostalCode(e.target.value)} 
                         // required
                         />
                     </div>
                 </div>
                 <div className="field">
-                    <label className="label">Street</label>
+                    <label className="label">Rua</label>
                     <div className="control">
                         <input type="text" className="input" 
-                        placeholder="Enter Street" value={street} 
+                        placeholder="Rua" value={street}
                         onChange={(e) => setStreet(e.target.value)} 
                         required
                         />
                     </div>
                 </div>
                 <div className="field">
-                    <label className="label">Number</label>
+                    <label className="label">Número</label>
                     <div className="control">
-                        <input type="text" className="input" 
-                        placeholder="Enter Number" value={number} 
+                        <input type="number" className="input"
+                        placeholder="Numero" value={number}
                         onChange={(e) => setNumber(e.target.value)} 
                         required
                         />
                     </div>
                 </div>
                 <div className="field">
-                    <label className="label">Complement</label>
+                    <label className="label">Complemento</label>
                     <div className="control">
                         <input type="text" className="input" 
-                        placeholder="Enter Complement" value={complement} 
+                        placeholder="Complemento" value={complement}
                         onChange={(e) => setComplement(e.target.value)} 
                         // required
                         />
@@ -148,8 +148,8 @@ const Register = () =>{
                 <div className="field">
                     <label className="label">CPF</label>
                     <div className="control">
-                        <input type="text" className="input" 
-                        placeholder="Enter CPF" value={cpf} 
+                        <input type="number" className="input"
+                        placeholder="CPF" value={cpf}
                         onChange={(e) => setCPF(e.target.value)} 
                         required
                         />
@@ -158,18 +158,18 @@ const Register = () =>{
                 <div className="field">
                     <label className="label">PIS</label>
                     <div className="control">
-                        <input type="text" className="input" 
-                        placeholder="Enter PIS" value={pis} 
+                        <input type="number" className="input"
+                        placeholder="PIS" value={pis}
                         onChange={(e) => setPIS(e.target.value)} 
                         required
                         />
                     </div>
                 </div>
                 <div className="field">
-                    <label className="label">Password</label>
+                    <label className="label">Senha</label>
                     <div className="control">
                         <input type="password" className="input" 
-                        placeholder="Enter Password" value={password} 
+                        placeholder="Senha" value={password}
                         onChange={(e) => setPassword(e.target.value)} 
                         required
                         />
@@ -179,7 +179,7 @@ const Register = () =>{
                 <br/>
                 <div className="has-text-centered">
                     <button className="button is-primary" type="submit">
-                        Register
+                        Cadastrar
                     </button>
                 </div>
             </form>

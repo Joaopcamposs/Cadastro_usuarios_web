@@ -38,17 +38,17 @@ const Login = () => {
                     <label htmlFor="" className="label">CPF</label>
                     <div className="control">
                         <input type="text" className="input" 
-                        placeholder="Enter CPF" value={cpf} 
+                        placeholder="CPF" value={cpf}
                         onChange={(e) => setCPF(e.target.value)} 
                         required
                         />
                     </div>
                 </div>
                 <div className="field">
-                    <label htmlFor="" className="label">Password</label>
+                    <label htmlFor="" className="label">Senha</label>
                     <div className="control">
                         <input type="password" className="input" 
-                        placeholder="Enter Password" value={password} 
+                        placeholder="Senha" value={password}
                         onChange={(e) => setPassword(e.target.value)} 
                         required
                         />
@@ -58,10 +58,9 @@ const Login = () => {
                 <br/>
                 <div className="has-text-centered">
                     <button className="button is-primary" type="submit">
-                        Login
+                        Entrar
                     </button>
                 </div>
-                
             </form>
         </div>
     );
