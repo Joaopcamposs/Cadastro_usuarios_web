@@ -83,3 +83,31 @@ async def delete_user(session: Session, _cpf: str):
     session.commit()
 
     return
+
+
+def create_db():
+    from sqlalchemy import create_engine
+    from sqlalchemy.orm import sessionmaker
+    engine = create_engine('mysql+pymysql://root:password@mysql_db/')
+    Session = sessionmaker(engine)
+    with Session.begin() as session:
+        session.execute('CREATE DATABASE projetoWeb;')
+        session.execute('use projetoWeb;')
+        session.execute("""create table users (
+                        id int AUTO_INCREMENT PRIMARY KEY,
+                        name varchar(50) NOT NULL,
+                        email varchar(50) NOT NULL,
+                        country varchar(50) NOT NULL,
+                        state varchar(50) NOT NULL,
+                        city varchar(50) NOT NULL,
+                        postal_code varchar(8) NOT NULL,
+                        street varchar(50) NOT NULL,
+                        number varchar(50) NOT NULL,
+                        complement varchar(50),
+                        CPF varchar(11) NOT NULL,
+                        PIS varchar(50),
+                        hashed_password varchar(256) NOT NULL
+                        );""")
+        session.commit()
+
+    return "Banco Criado"

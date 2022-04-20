@@ -1,13 +1,20 @@
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException, security
 from sqlalchemy.orm import Session
-from backend.app.crud import get_all_users, create_user, update_user, delete_user, get_user_by_cpf
+from backend.app.crud import get_all_users, create_user, update_user, delete_user, get_user_by_cpf, create_db
 from backend.app.database import get_db
 from backend.app.exceptions import UserException
 from backend.app.schemas import User, CreateAndUpdateUser
 from backend.app.services import authenticate_user_cpf, create_token, get_user
 
 app = APIRouter()
+
+
+@app.get("/api/initDB")
+def initialize_db():
+    result = create_db()
+
+    return result
 
 
 # API endpoint to get the list of users
