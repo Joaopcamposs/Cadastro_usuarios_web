@@ -41,13 +41,37 @@ const Register = () =>{
         }
     };
 
+    const cpfCheck = (cpf_val) => {
+        cpf_val = cpf_val.replace(/\D/g, '');
+        if(cpf_val.toString().length != 11 || /^(\d)\1{10}$/.test(cpf_val)) return false;
+        var result = true;
+        [9,10].forEach(function(j){
+            var soma = 0, r;
+            cpf_val.split(/(?=)/).splice(0,j).forEach(function(e, i){
+                soma += parseInt(e) * ((j+2)-(i+1));
+            });
+            r = soma % 11;
+            r = (r <2)?0:11-r;
+            if(r != cpf_val.substring(j, j+1)) result = false;
+        });
+        return result;
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if(password.length >= 8){
-            submitRegister();
+            if(postal_code.length === 8){
+                if(cpfCheck(cpf)){
+                    submitRegister();
+                }else{
+                    setErrorMessage("Insira um CPF válido de 11 caracteres");
+                }
+            }else{
+                setErrorMessage("Insira um CEP válido de 8 caracteres");
+            }
         }else{
-            setErrorMessage("Certifique-se de que a senha tenha mais de 8 caracteres")
-        }
+            setErrorMessage("Certifique-se de que a senha tenha mais de 8 caracteres");
+        }         
     };
 
     return(
@@ -111,7 +135,7 @@ const Register = () =>{
                         <input type="number" className="input"
                         placeholder="CEP" value={postal_code}
                         onChange={(e) => setPostalCode(e.target.value)} 
-                        // required
+                        required
                         />
                     </div>
                 </div>

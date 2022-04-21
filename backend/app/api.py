@@ -46,16 +46,6 @@ async def get_user_info(user_cpf: str, session: Session = Depends(get_db)):
         raise HTTPException(**cie.__dict__)
 
 
-# API endpoint to get info of a particular user by id
-# @router.get("/api/user/id&{user_id}", response_model=User)
-# def get_user_id(user_id: int, session: Session = Depends(get_db)):
-#     try:
-#         user = get_user_by_id(session, user_id)
-#         return user
-#     except UserException as cie:
-#         raise HTTPException(**cie.__dict__)
-
-
 # API endpoint to update a existing user
 @app.put("/api/user/{user_cpf}", response_model=User)
 async def update_user_info(user_cpf: str, new_info: CreateAndUpdateUser,

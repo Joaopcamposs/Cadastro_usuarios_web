@@ -87,71 +87,104 @@ const EditUser= () => {
         setToken(null);
     };
 
+    const cpfCheck = (cpf_val) => {
+        cpf_val = cpf_val.replace(/\D/g, '');
+        if(cpf_val.toString().length != 11 || /^(\d)\1{10}$/.test(cpf_val)) return false;
+        var result = true;
+        [9,10].forEach(function(j){
+            var soma = 0, r;
+            cpf_val.split(/(?=)/).splice(0,j).forEach(function(e, i){
+                soma += parseInt(e) * ((j+2)-(i+1));
+            });
+            r = soma % 11;
+            r = (r <2)?0:11-r;
+            if(r != cpf_val.substring(j, j+1)) result = false;
+        });
+        return result;
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if(password.length >= 8){
+            if(postal_code.length === 8){
+                if(cpfCheck(cpf)){
+                    updateUser();
+                    setErrorMessage("Usuário atualizado com sucesso!")
+                }else{
+                    setErrorMessage("Insira um CPF válido de 11 caracteres");
+                }
+            }else{
+                setErrorMessage("Insira um CEP válido de 8 caracteres");
+            }
+        }else{
+            setErrorMessage("Certifique-se de que a senha tenha mais de 8 caracteres");
+        }         
+    };
+
     return(
         <>
-            <ErrorMessage message={errorMessage}/>
             {loaded && user ? (
-                <div className="box">
-                <h1 className="title has-text-centered">Editar Cadastro</h1>
-                    <section className="">
-                        <form>
-                            <label className="label">Nome</label>
-                            <input type="text" className="input" value={name} 
-                            onChange={(e) => setName(e.target.value)} required/>
-                            <br/><br/>
-                            <label className="label">Email</label>
-                            <input type="email" className="input" value={email}
-                            onChange={(e) => setEmail(e.target.value)} required/>
-                            <br/><br/>
-                            <label className="label">País</label>
-                            <input type="text" className="input" value={country}
-                            onChange={(e) => setCountry(e.target.value)} required/>
-                            <br/><br/>
-                            <label className="label">Estado</label>
-                            <input type="text" className="input" value={state}
-                            onChange={(e) => setState(e.target.value)} required/>
-                            <br/><br/>
-                            <label className="label">Cidade</label>
-                            <input type="text" className="input" value={city}
-                            onChange={(e) => setCity(e.target.value)} required/>
-                            <br/><br/>
-                            <label className="label">CEP</label>
-                            <input type="number" className="input" value={postal_code}
-                            onChange={(e) => setPostalCode(e.target.value)}/>
-                            <br/><br/>
-                            <label className="label">Rua</label>
-                            <input type="text" className="input" value={street}
-                            onChange={(e) => setStreet(e.target.value)} required/>
-                            <br/><br/>
-                            <label className="label">Número</label>
-                            <input type="number" className="input" value={number}
-                            onChange={(e) => setNumber(e.target.value)} required/>
-                            <br/><br/>
-                            <label className="label">Complemento</label>
-                            <input type="text" className="input" value={complement}
-                            onChange={(e) => setComplement(e.target.value)}/>
-                            <br/><br/>
-                            <label className="label">CPF</label>
-                            <input type="number" className="input" value={cpf}
-                            onChange={(e) => setCPF(e.target.value)} required/>
-                            <br/><br/>
-                            <label className="label">PIS</label>
-                            <input type="number" className="input" value={pis}
-                            onChange={(e) => setPIS(e.target.value)} required/>
-                            <br/><br/>
-                            <label className="label">Senha</label>
-                            <input type="password" className="input" value={""}
-                            onChange={(e) => setPassword(e.target.value)} required/>
-                            <br/>
-                        </form>
-                    </section>
-                    
-                    <div className="">
+                <div className="column">
+                    <form className="box" onSubmit={handleSubmit}>
+                        <h1 className="title has-text-centered">Editar Cadastro</h1>
+
+                        <label className="label">Nome</label>
+                        <input type="text" className="input" value={name} 
+                        onChange={(e) => setName(e.target.value)} required/>
+                        <br/><br/>
+                        <label className="label">Email</label>
+                        <input type="email" className="input" value={email}
+                        onChange={(e) => setEmail(e.target.value)} required/>
+                        <br/><br/>
+                        <label className="label">País</label>
+                        <input type="text" className="input" value={country}
+                        onChange={(e) => setCountry(e.target.value)} required/>
+                        <br/><br/>
+                        <label className="label">Estado</label>
+                        <input type="text" className="input" value={state}
+                        onChange={(e) => setState(e.target.value)} required/>
+                        <br/><br/>
+                        <label className="label">Cidade</label>
+                        <input type="text" className="input" value={city}
+                        onChange={(e) => setCity(e.target.value)} required/>
+                        <br/><br/>
+                        <label className="label">CEP</label>
+                        <input type="number" className="input" value={postal_code}
+                        onChange={(e) => setPostalCode(e.target.value)}/>
+                        <br/><br/>
+                        <label className="label">Rua</label>
+                        <input type="text" className="input" value={street}
+                        onChange={(e) => setStreet(e.target.value)} required/>
+                        <br/><br/>
+                        <label className="label">Número</label>
+                        <input type="number" className="input" value={number}
+                        onChange={(e) => setNumber(e.target.value)} required/>
+                        <br/><br/>
+                        <label className="label">Complemento</label>
+                        <input type="text" className="input" value={complement}
+                        onChange={(e) => setComplement(e.target.value)}/>
+                        <br/><br/>
+                        <label className="label">CPF</label>
+                        <input type="number" className="input" value={cpf}
+                        onChange={(e) => setCPF(e.target.value)} required/>
+                        <br/><br/>
+                        <label className="label">PIS</label>
+                        <input type="number" className="input" value={pis}
+                        onChange={(e) => setPIS(e.target.value)} required/>
+                        <br/><br/>
+                        <label className="label">Senha</label>
+                        <input type="password" className="input"
+                        onChange={(e) => setPassword(e.target.value)} required/>
                         <br/>
-                        <button className="button is-link" 
-                        onClick={() => {updateUser()}}>Salvar</button>
-                        <button className="button is-danger" 
-                        onClick={() => {deleteUser()}} style={{float:"right"}}>Excluir</button>
+                        <ErrorMessage message={errorMessage}/>
+                        <div className="has-text-centered">
+                            <br/>
+                            <button className="button is-link" type="submit">Salvar</button>
+                        </div>
+                    </form>
+                    <div className="has-text-centered">
+                        <button className="button is-danger" onClick={() => {deleteUser()}} 
+                            >Excluir Cadastro</button>
                     </div>
                 </div>
             ) : 

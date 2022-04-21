@@ -11,16 +11,6 @@ async def get_all_users(session: Session) -> List[User]:
     return session.query(User).all()
 
 
-# Function to  get info of a particular user by id
-# def get_user_by_id(session: Session, _id: int) -> User:
-#     user = session.query(User).get(_id)
-#
-#     if user is None:
-#         raise UserNotFoundError
-#
-#     return user
-
-
 # Function to  get info of a particular user by CPF
 async def get_user_by_cpf(session: Session, _cpf: str) -> User:
     user = session.query(User).filter(User.CPF == _cpf).first()
