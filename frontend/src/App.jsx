@@ -36,12 +36,16 @@ const App = () => {
             {
               // if user not logged
               !token ? (
-                <div className="rows">
+                <div className="rows has-text-centered">
                   <div className="columns is-centered">
                     <button className="button is-info"
-                    onClick={() => setRegister(false)}>Entrar</button>
+                    onClick={() => setRegister(false)}
+                    style={{width: "102px"}}
+                    >Entrar</button>
                     <button className="button is-danger"
-                    onClick={() => setRegister(true)}>Cadastrar</button>
+                    onClick={() => setRegister(true)}
+                    style={{width: "102px"}}
+                    >Cadastrar</button>
                   </div>
                   { !register ? <Login/> : <Register/> }
                 </div>
