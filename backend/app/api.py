@@ -9,12 +9,7 @@ from backend.app.services import authenticate_user_cpf, create_token, get_user
 
 app = APIRouter()
 
-
-@app.get("/api/initDB")
-def initialize_db():
-    result = create_db()
-
-    return result
+create_db()
 
 
 # API endpoint to get the list of users

@@ -8,24 +8,6 @@ import { UserContext } from "./context/UserContext";
 const App = () => {
   const [token] = useContext(UserContext);
   const [register, setRegister] = useState("");
-  const [initDB, setInitDB] = useState(false);
-
-  const init_DB = async () => {
-    const requestOptions ={
-        method: "GET",
-        headers: {
-            "accept": "application/json",
-        },
-    };
-    const response = await fetch("/api/initDB", requestOptions);
-  }
-
-  useEffect(() =>{
-    if (!initDB){
-        init_DB();
-        setInitDB(true);
-    }
-  }, []);
 
   return (
     <>
