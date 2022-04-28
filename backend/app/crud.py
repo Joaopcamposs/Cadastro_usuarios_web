@@ -80,10 +80,11 @@ def create_db():
     from sqlalchemy.orm import sessionmaker
     engine = create_engine('mysql+pymysql://root:password@mysql_db/')
     Session = sessionmaker(engine)
-    with Session.begin() as session:
-        session.execute('CREATE DATABASE projetoWeb;')
-        session.execute('use projetoWeb;')
-        session.execute("""create table users (
+    try:
+        with Session.begin() as session:
+            session.execute('CREATE DATABASE projetoWeb;')
+            session.execute('use projetoWeb;')
+            session.execute("""create table users (
                         id int AUTO_INCREMENT PRIMARY KEY,
                         name varchar(50) NOT NULL,
                         email varchar(50) NOT NULL,
@@ -98,6 +99,8 @@ def create_db():
                         PIS varchar(50),
                         hashed_password varchar(256) NOT NULL
                         );""")
-        session.commit()
+            session.commit()
+    except:
+        return "Something went wrong"
 
-    return "Banco Criado"
+    return "created database"
