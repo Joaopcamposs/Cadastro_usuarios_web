@@ -9,8 +9,8 @@
 <p>Login por CPF + Senha</p>
 
 <h2>Instalação com docker</h2>
-<p>Clonar o repositório: https://github.com/Joaopcamposs/ProjetoWeb.git</p>
-<p>Entrar na pasta: cd projetoWeb</p>
+<p>Clonar o repositório: https://github.com/Joaopcamposs/Cadastro_usuarios_web.git</p>
+<p>Entrar na pasta: cd Cadastro_usuarios_web</p>
 <p>Utilizar o comando: docker-compose build db</p>
 <p>Utilizar o comando: docker-compose up -d db</p>
 <p>Utilizar o comando: docker-compose up -d --build</p>
